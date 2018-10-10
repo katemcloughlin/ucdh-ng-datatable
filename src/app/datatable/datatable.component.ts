@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
-import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-datatable',
@@ -8,9 +7,8 @@ import {SelectionModel} from '@angular/cdk/collections';
   styleUrls: ['./datatable.component.css']
 })
 export class DatatableComponent implements OnInit, AfterViewChecked {
-  displayedColumns: string[] = ['select', 'courseCode', 'courseName', 'period', 'length', 'published', 'action'];
+  displayedColumns: string[] = ['courseCode', 'courseName', 'period', 'length', 'published', 'action'];
   dataSource = new MatTableDataSource<TestData>(ELEMENT_DATA);
-  selection = new SelectionModel<TestData>(true, []);
   length = 10;
   pageSize = 10;
   pageSizeOptions: number[] = [10, 25, 100];
@@ -23,20 +21,6 @@ export class DatatableComponent implements OnInit, AfterViewChecked {
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
-  }
-
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-    this.selection.clear() :
-    this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
   ngOnInit() {
