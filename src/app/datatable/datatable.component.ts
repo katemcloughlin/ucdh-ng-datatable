@@ -64,7 +64,7 @@ export class DatatableComponent implements OnInit, AfterViewChecked {
 
 }
 
-
+/* Test Data for Table */
 export interface TestData {
   id: string;
   courseCode: string;
